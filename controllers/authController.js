@@ -11,7 +11,12 @@ router.post("/", async (req,res) => {
         req.session.message = {};
         req.session.message.type = "login";
         req.session.message.text = "The username or password is incorrect";
-        res.redirect("/");
+        res.json({
+            status:  {
+                code: 400,
+                message: "Please enter valid credentials."
+              }
+          })
     } 
 	try {
 		const foundUser = await User.findOne({username: req.body.username});
@@ -24,20 +29,32 @@ router.post("/", async (req,res) => {
                 res.json({
                     status:  {
                         code: 400,
-                        message: req.session.message
+                        message: "Success"
                       }
                   })
 
 			} else {
 				req.session.message = {};
 				req.session.message.type = "login";
-				req.session.message.text = "The username or password is incorrect";
+                req.session.message.text = "The username or password is incorrect";
+                res.json({
+                    status:  {
+                        code: 400,
+                        message: "The username or password is incorrect"
+                      }
+                  })
 				
 			} 
 		} else {
 			req.session.message = {};
 			req.session.message.type = "login";
-			req.session.message.text = "The username or password is incorrect";
+            req.session.message.text = "The username or password is incorrect";
+            res.json({
+                status:  {
+                    code: 400,
+                    message: "The username or password is incorrect"
+                  }
+              })
 			
 		} 	
 	} catch(err) {
@@ -56,12 +73,12 @@ router.post("/register", async (req,res) => {
 	req.body.password = hashedPassword;
 	if(req.body.username == "" || req.body.password =="") {
         req.session.message = {};
-        req.session.message.type = "login";
-        req.session.message.text = "That username is currently in use.";
+        req.session.message.type = "register";
+        req.session.message.text = "Please enter valid credentials.";
         res.json({
             status:  {
                 code: 400,
-                message: req.session.message
+                message: "Please enter valid credentials."
               }
           })
     } 
@@ -84,7 +101,12 @@ router.post("/register", async (req,res) => {
 			req.session.message = {};
 			req.session.message.type = "register"
 			req.session.message.text = "That username has been taken, please enter another username.";
-			res.redirect("/");
+			res.json({
+                status:  {
+                    code: 400,
+                    message: "That username has been taken, please enter another username."
+                  }
+              })
 		} else {
 			res.send(err);
 		}

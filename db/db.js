@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 
-mongoose.connect('mongodb://localhost/user', {
+mongoose.connect('mongodb://localhost/nitein', {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false
