@@ -28,7 +28,7 @@ router.post("/", async (req,res) => {
                 req.session.logged = true;
                 res.json({
                     status:  {
-                        code: 400,
+                        code: 200,
                         message: "Success"
                       }
                   })
@@ -119,7 +119,12 @@ router.get("/", (req,res) => {
 		if(err) {
 			res.send(err);
 		} else {
-			res.redirect("/");
+			res.json({
+                status:  {
+                    code: 400,
+                    message: "Error logging out."
+                  }
+              });
 		}
 	})
 });
