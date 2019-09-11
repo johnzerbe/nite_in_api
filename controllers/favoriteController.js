@@ -4,22 +4,22 @@ const Favorites = require('../models/favorites');
 const User = require('../models/user');
 
 
-//INDEX
+//GET ALL DATA FOR USER PAGE
 router.get('/', async (req, res) => {
     try {
-        const allFavorites = await User.find({});
-        console.log(req.session, ' THIS IS REQ.SESSION')
+        const foundUser = await User.findById(req.session.userId);
+        console.log('foundUser ', foundUser);
         res.json({
             code: 200,
             message: "Success",
-            data: allFavorites
+            data: foundUser
         })
     } catch(err) {
         res.send(err)
     }
 });
 
-// ADD FAVORITE RECIPES
+// ADD FAVORITE RECIPES AND MOVIES
 router.post('/:type', async (req, res) => {
     try {
         console.log(req.body, ' THIS IS REQ.BODY');
@@ -43,7 +43,7 @@ router.post('/:type', async (req, res) => {
     }
 });
 
-// ADD SAVED FOR LATER RECIPE
+// ADD SAVED FOR LATER RECIPE AND MOVIE
 router.post('/savedforlater/:latertype', async (req, res) => {
     try {
         console.log(req.body, ' THIS IS REQ.BODY');
@@ -68,29 +68,6 @@ router.post('/savedforlater/:latertype', async (req, res) => {
     }
 })
 
-// // ADD FAVORITE MOVIES
-// router.post('/', async (req, res) => {
-//     try {
-//         console.log(req.body, ' THIS IS REQ.BODY');
-//         console.log(req.session, 'REQ.SESSION IN POST ROUTE');
-//         const foundUser = await User.findById(req.session.userId);
-//         console.log('THIS IS FOUNDUSER: ',foundUser);
-//         const createdFavorite = await foundUser.favorites.movies.push(req.body);
-//         const savedFavorite = await foundUser.save();
-//         console.log(savedFavorite);
-
-//         res.json({
-//             status: {
-//                 code: 201,
-//                 message: "Success"
-//             },
-//             data: savedFavorite
-//         })
-//     } catch(err) {
-//         console.log(err);
-//         res.send(err);
-//     }
-// });
 
 
 router.get('/:id', async (req, res, next) => {
