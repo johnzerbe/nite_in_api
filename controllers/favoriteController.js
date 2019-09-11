@@ -70,15 +70,72 @@ router.post('/savedforlater/:latertype', async (req, res) => {
 
 
 
-router.get('/:id', async (req, res, next) => {
+// router.get('/:id', async (req, res, next) => {
+//     try {
+//         const foundFavorite = await Favorites.findById(req.params.id);
+//         res.json({
+//             status: {
+//                 code: 200,
+//                 message: "Success"
+//             },
+//             data: foundFavorite
+//         })
+//     } catch(err) {
+//         res.send(err)
+//     }
+// });
+
+
+// router.put('/:id', async (req, res) => {
+//     try {
+//         const updatedFavorite = await Favorites.findByIdAndUpdate(req.params.id, req.body, {new: true});
+//         res.json({
+//             status: {
+//                 code: 200,
+//                 message: 'resource updated successfully'
+//             },
+//             data: updatedFavorite
+//         })
+//     } catch(err){
+//         res.send(err)
+//     }
+// });
+
+
+// DELETE FAVORITE
+router.delete('/:id/:type', async (req, res) => {
+    console.log('AAAAAAAAAAA');
     try {
-        const foundFavorite = await Favorites.findById(req.params.id);
-        res.json({
+        const foundUser = await User.findById(req.session.userId);
+        console.log('foundUser: ', foundUser);
+        const userFavorite = await foundUser.favorites[req.params.type];
+        console.log('userFavorite: ', userFavorite);
+        const chosenType = (req.params.type == 'recipes' ? 'chosenRecipe' : 'chosenMovie');
+        
+        //foundUser.favorites[req.params.type][i][chosenType].id
+
+        for(let i = 0; i < foundUser.favorites[req.params.type].length; i++) {
+            //console.log('BBBBBB',userFavorite[i][chosenType].id);
+            //console.log('req.params.id:', req.params.id);
+            //console.log(foundUser.favorites[req.params.type].id == req.params.id);
+            //console.log('CCCCCCC', foundUser.favorites[req.params.type][i][chosenType].id);
+            if(foundUser.favorites[req.params.type][i][chosenType].id == req.params.id) {
+                console.log('TRUE');
+                foundUser.favorites[req.params.type].splice(i, 1);
+            }
+        }
+
+        foundUser.save();
+        const updatedUser = await User.findById(req.session.userId);
+        console.log('updatedUser: ', updatedUser);
+
+       res.json({
             status: {
                 code: 200,
-                message: "Success"
+                message: "resource deleted successfully"
             },
-            data: foundFavorite
+            data: updatedUser
+
         })
     } catch(err) {
         res.send(err)
@@ -86,27 +143,11 @@ router.get('/:id', async (req, res, next) => {
 });
 
 
-router.put('/:id', async (req, res) => {
+router.delete('/savedForLater/:id/:type', async (req, res) => {
     try {
-        const updatedFavorite = await Favorites.findByIdAndUpdate(req.params.id, req.body, {new: true});
-        res.json({
-            status: {
-                code: 200,
-                message: 'resource updated successfully'
-            },
-            data: updatedFavorite
-        })
-    } catch(err){
-        res.send(err)
-    }
-});
-
-
-// DELETE
-router.delete('/:id', async (req, res) => {
-    try {
-        const deletedFavorite = await Favorites.findByIdAndRemove(req.params.id);
-        res.json({
+        const foundUser = await User.findById(req.session.userId);
+        const userFavorite = await foundUser.favorites[req.params.type]
+;        res.json({
             status: {
                 code: 200,
                 message: "resource deleted successfully"
@@ -116,5 +157,6 @@ router.delete('/:id', async (req, res) => {
         res.send(err)
     }
 });
+
 
 module.exports = router;

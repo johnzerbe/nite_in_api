@@ -121,8 +121,8 @@ router.get("/", (req,res) => {
 		} else {
 			res.json({
                 status:  {
-                    code: 400,
-                    message: "Error logging out."
+                    code: 200,
+                    message: "LOGGED OUT SUCCESSFULLY"
                   }
               });
 		}

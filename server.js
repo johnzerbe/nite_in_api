@@ -25,7 +25,6 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-const userController = require('./controllers/userController');
 const authController = require('./controllers/authController');
 const favoriteController = require('./controllers/favoriteController');
 
