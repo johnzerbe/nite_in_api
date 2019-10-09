@@ -14,8 +14,12 @@
   "main": "server.js",
   "devDependencies": {},
   "scripts": {
-    "start": "node server/server.js",
-    "heroku-postbuild": "cd nitein && yarn && yarn run build",
+    "client-install": "npm install --prefix client",    
+    "start": "node index.js",    
+    "server": "nodemon index.js",    
+    "client": "npm start --prefix client",    
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "cd nite_in && yarn install && yarn install --only=dev --no-shrinkwrap && yarn run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
