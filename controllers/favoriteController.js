@@ -146,16 +146,51 @@ router.delete('/:id/:type', async (req, res) => {
 router.delete('/savedForLater/:id/:type', async (req, res) => {
     try {
         const foundUser = await User.findById(req.session.userId);
-        const userFavorite = await foundUser.favorites[req.params.type]
-;        res.json({
+        console.log('foundUser: ', foundUser);
+        const userFavorite = await foundUser.savedForLater[req.params.type];
+        console.log('userFavorite: ', userFavorite);
+        const chosenType = (req.params.type == 'recipes' ? 'chosenRecipe' : 'chosenMovie');
+        
+        //foundUser.favorites[req.params.type][i][chosenType].id
+
+        for(let i = 0; i < foundUser.savedForLater[req.params.type].length; i++) {
+            //console.log('BBBBBB',userFavorite[i][chosenType].id);
+            //console.log('req.params.id:', req.params.id);
+            //console.log(foundUser.favorites[req.params.type].id == req.params.id);
+            //console.log('CCCCCCC', foundUser.favorites[req.params.type][i][chosenType].id);
+            if(foundUser.savedForLater[req.params.type][i][chosenType].id == req.params.id) {
+                console.log('TRUE');
+                foundUser.savedForLater[req.params.type].splice(i, 1);
+            }
+        }
+
+        foundUser.save();
+        const updatedUser = await User.findById(req.session.userId);
+        console.log('updatedUser: ', updatedUser);
+
+       res.json({
             status: {
                 code: 200,
                 message: "resource deleted successfully"
-            }
+            },
+            data: updatedUser
+
         })
     } catch(err) {
         res.send(err)
     }
+//     try {
+//         const foundUser = await User.findById(req.session.userId);
+//         const userFavorite = await foundUser.favorites[req.params.type]
+// ;        res.json({
+//             status: {
+//                 code: 200,
+//                 message: "resource deleted successfully"
+//             }
+//         })
+//     } catch(err) {
+//         res.send(err)
+//     }
 });
 
 

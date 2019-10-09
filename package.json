@@ -14,6 +14,8 @@
   "main": "server.js",
   "devDependencies": {},
   "scripts": {
+    "start": "node server/server.js",
+    "heroku-postbuild": "cd nitein && yarn && yarn run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
