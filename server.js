@@ -32,6 +32,10 @@ const favoriteController = require('./controllers/favoriteController');
 app.use('/auth', authController);
 app.use('/favorite', favoriteController);
 
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "nite_in", "build", "index.html"));
+});
+
 app.listen(process.env.PORT || 9000, () => {
     console.log('listening on port 9000');
 });
