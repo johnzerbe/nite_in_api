@@ -19,7 +19,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 const corsOptions = {
-    origin: 'http://localhost:3000', // when react app is deployed, this is where the address goes
+    // origin: 'http://localhost:3000', // when react app is deployed, this is where the address goes
+    origin: 'https://nitein3.herokuapp.com/',
     credentials: true, // allows cookies to be sent with requests from the client (session cookie)
     optionsSuccessStatus: 200
 }
