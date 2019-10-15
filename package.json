@@ -10,6 +10,10 @@
   },
   "name": "nite_in_api",
   "description": "",
+  "engines": {
+    "npm": "6.10.0",
+    "node": "12.7.0"
+  },
   "version": "1.0.0",
   "main": "server.js",
   "devDependencies": {},
@@ -19,7 +23,7 @@
     "server": "nodemon index.js",    
     "client": "npm start --prefix client",    
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
+    "heroku-postbuild": "cd nite_in && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
