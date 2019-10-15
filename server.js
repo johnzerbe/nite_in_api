@@ -35,7 +35,7 @@ app.use('/auth', authController);
 app.use('/favorite', favoriteController);
 
 app.listen(process.env.PORT, () => {
-    console.log('listening on port 3000');
+    console.log('listening on port 9000');
   })
 
 // app.set('port', process.env.PORT || 9000)
