@@ -3,6 +3,7 @@
     "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "dotenv": "^8.1.0",
     "ejs": "^2.7.1",
     "express": "^4.17.1",
     "express-session": "^1.16.2",
@@ -18,12 +19,11 @@
   "main": "server.js",
   "devDependencies": {},
   "scripts": {
-    "client-install": "npm install --prefix client",    
-    "start": "node index.js",    
-    "server": "nodemon index.js",    
-    "client": "npm start --prefix client",    
+    "client-install": "npm install --prefix client",
+    "start": "node index.js",
+    "server": "nodemon index.js",
+    "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "cd nite_in && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
