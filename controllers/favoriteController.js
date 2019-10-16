@@ -8,6 +8,8 @@ const User = require('../models/user');
 router.get('/', async (req, res) => {
     try {
         const foundUser = await User.findById(req.session.userId);
+        console.log('REQ.SESSION: ', req.session);
+        console.log('REQ.SESSION.USERID: ', req.session.userId);
         console.log('foundUser ', foundUser);
         res.json({
             code: 200,
