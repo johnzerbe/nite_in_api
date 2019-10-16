@@ -136,6 +136,7 @@ router.get('/logout', function(req, res, next) {
         if(err) {
           res.send(err);
         } else {
+            console.log("REQ.SESSION: ", req.session);
             res.json({
                 status:  {
                     code: 200,
