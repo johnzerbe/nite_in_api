@@ -114,20 +114,38 @@ router.post("/register", async (req,res) => {
 });
 
 
-router.get("/", (req,res) => {
-	req.session.destroy((err) => {
-		if(err) {
-			res.send(err);
-		} else {
-			res.json({
+// router.get("/", (req,res) => {
+// 	req.session.destroy((err) => {
+// 		if(err) {
+// 			res.send(err);
+// 		} else {
+// 			res.json({
+//                 status:  {
+//                     code: 200,
+//                     message: "LOGGED OUT SUCCESSFULLY"
+//                   }
+//               });
+// 		}
+// 	})
+// });
+
+router.get('/logout', function(req, res, next) {
+    if (req.session) {
+      // delete session object
+      req.session.destroy(function(err) {
+        if(err) {
+          res.send(err);
+        } else {
+            res.json({
                 status:  {
                     code: 200,
                     message: "LOGGED OUT SUCCESSFULLY"
                   }
               });
-		}
-	})
-});
+        }
+      });
+    }
+  });
 
 
 
