@@ -5,10 +5,18 @@ const cors = require('cors');
 const session = require('express-session');
 require('dotenv').config();
 
-require('./db/db');
+const dbConnection = require('./db/db');
+
+// const sessionStore = new mongoStore(
+//     {
+//         mongooseConnection: dbConnection,
+//         secret: process.env.STORE_SECRET
+//     });
+    
 
 app.use(session({
     secret: 'keyboard cat',
+    //store: sessionStore,
     resave: false,
     saveUninitialized: false
 }));
@@ -33,6 +41,10 @@ const favoriteController = require('./controllers/favoriteController');
 // app.use('/api/v1/user', userController);
 app.use('/auth', authController);
 app.use('/favorite', favoriteController);
+
+app.get('/fakeroute', (req,res) => {
+    res.render('fakefile.ejs')
+})
 
 app.listen(process.env.PORT, () => {
     console.log('listening on port 9000');
