@@ -36,7 +36,7 @@ const corsOptions = {
     optionsSuccessStatus: 200
 }
 
-app.options('*', cors());
+// app.options('/auth', cors());
 
 app.use(cors(corsOptions));
 
