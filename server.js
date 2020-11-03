@@ -3,21 +3,22 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
 require('dotenv').config();
 
 
 const dbConnection = require('./db/db');
 
-// const sessionStore = new mongoStore(
-//     {
-//         mongooseConnection: dbConnection,
-//         secret: process.env.STORE_SECRET
-//     });
+const sessionStore = new MongoDBStore(
+    {
+        mongooseConnection: dbConnection,
+        secret: process.env.STORE_SECRET
+    });
     
 
 app.use(session({
     secret: 'keyboard cat',
-    //store: sessionStore,
+    store: sessionStore,
     resave: true,
     saveUninitialized: true
 }));
@@ -28,9 +29,9 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 const corsOptions = {
-    // origin: 'http://localhost:3000', 
+    origin: 'http://localhost:3000', 
     // when react app is deployed, this is where the address goes
-    origin: 'https://nitein3.herokuapp.com',
+    // origin: 'https://nitein3.herokuapp.com',
     credentials: true, // allows cookies to be sent with requests from the client (session cookie)
     optionsSuccessStatus: 200
 }

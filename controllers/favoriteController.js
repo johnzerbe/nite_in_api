@@ -30,8 +30,7 @@ router.post('/:type', async (req, res) => {
         console.log('THIS IS FOUNDUSER: ', foundUser);
         const createdFavorite = await foundUser.favorites[req.params.type].push(req.body);
         const savedFavorite = await foundUser.save();
-        console.log(savedFavorite);
-
+        console.log("SAVED FAVORITE: ", savedFavorite);
         res.json({
             status: {
                 code: 201,
@@ -54,7 +53,7 @@ router.post('/savedforlater/:latertype', async (req, res) => {
         console.log('THIS IS FOUNDUSER: ', foundUser);
         const savedForLater = await foundUser.savedForLater[req.params.latertype].push(req.body);
         const saved = await foundUser.save();
-        console.log(saved);
+        console.log("SAVED FAVORITE: ", saved);
 
         res.json({
             status: {
