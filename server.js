@@ -17,8 +17,8 @@ const dbConnection = require('./db/db');
 app.use(session({
     secret: 'keyboard cat',
     //store: sessionStore,
-    resave: false,
-    saveUninitialized: false
+    resave: true,
+    saveUninitialized: true
 }));
 
 // Set up CORS as Middleware, so any client can make a request
@@ -27,8 +27,9 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 const corsOptions = {
-    // origin: 'http://localhost:3000', // when react app is deployed, this is where the address goes
-    origin: 'https://nitein3.herokuapp.com',
+    // origin: 'http://localhost:3000', 
+    // when react app is deployed, this is where the address goes
+    origin: 'http://nitein3.herokuapp.com',
     credentials: true, // allows cookies to be sent with requests from the client (session cookie)
     optionsSuccessStatus: 200
 }
