@@ -36,6 +36,8 @@ const corsOptions = {
     optionsSuccessStatus: 200
 }
 
+app.options('*', cors());
+
 app.use(cors(corsOptions));
 
 const authController = require('./controllers/authController');
