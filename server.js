@@ -5,6 +5,7 @@ const cors = require('cors');
 const session = require('express-session');
 require('dotenv').config();
 
+
 const dbConnection = require('./db/db');
 
 // const sessionStore = new mongoStore(
@@ -29,7 +30,7 @@ app.use(bodyParser.json());
 const corsOptions = {
     // origin: 'http://localhost:3000', 
     // when react app is deployed, this is where the address goes
-    origin: 'http://nitein3.herokuapp.com',
+    origin: 'https://nitein3.herokuapp.com',
     credentials: true, // allows cookies to be sent with requests from the client (session cookie)
     optionsSuccessStatus: 200
 }
@@ -45,6 +46,12 @@ app.use('/favorite', favoriteController);
 
 app.get('/fakeroute', (req,res) => {
     res.render('fakefile.ejs')
+})
+// Serve static files from the React frontend app
+app.use(express.static(path.join(__dirname, 'client/build')))
+// Anything that doesn't match the above, send back index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/client/build/index.html'))
 })
 
 app.listen(process.env.PORT, () => {
