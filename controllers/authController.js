@@ -30,7 +30,8 @@ router.post("/", async (req,res) => {
                     status:  {
                         code: 200,
                         message: "Success"
-                      }
+                      },
+                      user: foundUser
                   })
 
 			} else {
