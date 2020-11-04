@@ -70,7 +70,6 @@ router.post("/", async (req,res) => {
 // REGISTER for users wanting to create an account
 router.post("/register", async (req,res) => {
     const password = req.body.password;
-    console.log(req.body, ' <- req.body in register');
 	// Encrypting password below
 	const hashedPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 	console.log(hashedPassword);
