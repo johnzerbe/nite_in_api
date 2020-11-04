@@ -49,9 +49,9 @@ app.use(cors(corsOptions));
 app.use('/auth', authController);
 app.use('/favorite', favoriteController);
 
-// app.get('/fakeroute', (req,res) => {
-//     res.render('fakefile.ejs')
-// })
+app.get('/fakeroute', (req,res) => {
+    res.render('fakefile.ejs')
+})
 
 
 app.listen(process.env.PORT, () => {
