@@ -23,6 +23,8 @@ router.get('/', async (req, res) => {
 
 // ADD FAVORITE RECIPES AND MOVIES
 router.post('/:type', async (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', 'https://nitein3.herokuapp.com');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
     try {
         console.log(req.body, ' THIS IS REQ.BODY');
         console.log(req.session, 'REQ.SESSION IN POST ROUTE');
@@ -36,7 +38,7 @@ router.post('/:type', async (req, res) => {
                 code: 201,
                 message: "Success"
             },
-            data: savedFavorite
+            data: createdFavorite
         })
     } catch(err) {
         console.log(err);
@@ -46,6 +48,8 @@ router.post('/:type', async (req, res) => {
 
 // ADD SAVED FOR LATER RECIPE AND MOVIE
 router.post('/savedforlater/:latertype', async (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', 'https://nitein3.herokuapp.com');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
     try {
         console.log(req.body, ' THIS IS REQ.BODY');
         console.log(req.session, 'REQ.SESSION IN POST ROUTE');
