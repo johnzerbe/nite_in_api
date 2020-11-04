@@ -23,15 +23,15 @@ router.get('/', async (req, res) => {
 
 // ADD FAVORITE RECIPES AND MOVIES
 router.post('/:type', async (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://nitein3.herokuapp.com');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    // res.setHeader('Access-Control-Allow-Origin', 'https://nitein3.herokuapp.com');
+    // res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
     try {
         console.log(req.body, ' THIS IS REQ.BODY');
         console.log(req.session, 'REQ.SESSION IN POST ROUTE');
         const foundUser = await User.findById(req.session.userId);
         console.log('THIS IS FOUNDUSER: ', foundUser);
-        const createdFavorite = foundUser.favorites[req.params.type].push(req.body);
-        const savedFavorite = await createdFavorite.save();
+        const createdFavorite = await foundUser.favorites[req.params.type].push(req.body);
+        const savedFavorite = await foundUser.save();
         console.log("SAVED FAVORITE: ", savedFavorite);
         res.json({
             status: {
@@ -48,16 +48,15 @@ router.post('/:type', async (req, res) => {
 
 // ADD SAVED FOR LATER RECIPE AND MOVIE
 router.post('/savedforlater/:latertype', async (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://nitein3.herokuapp.com');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    // res.setHeader('Access-Control-Allow-Origin', 'https://nitein3.herokuapp.com');
+    // res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
     try {
         console.log(req.body, ' THIS IS REQ.BODY');
         console.log(req.session, 'REQ.SESSION IN POST ROUTE');
         const foundUser = await User.findById(req.session.userId);
         console.log('THIS IS FOUNDUSER: ', foundUser);
         const savedForLater = await foundUser.savedForLater[req.params.latertype].push(req.body);
-        const saved = await savedForLater.save();
-        console.log("SAVED FAVORITE: ", saved);
+        const saved = await foundUser.save();
 
         res.json({
             status: {

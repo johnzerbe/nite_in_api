@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
+const authController = require('./controllers/authController');
+const favoriteController = require('./controllers/favoriteController');
 require('dotenv').config();
 
 
@@ -41,8 +43,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-const authController = require('./controllers/authController');
-const favoriteController = require('./controllers/favoriteController');
+
 
 // app.use('/api/v1/user', userController);
 app.use('/auth', authController);
