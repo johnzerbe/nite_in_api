@@ -33,7 +33,6 @@ router.post('/:type', async (req, res) => {
         const createdFavorite = await foundUser.favorites[req.params.type].push(req.body);
         const savedFavorite = await createdFavorite.save();
         console.log("SAVED FAVORITE: ", savedFavorite);
-        savedFavorite.clone();
         res.json({
             status: {
                 code: 201,
