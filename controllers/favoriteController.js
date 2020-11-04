@@ -30,7 +30,7 @@ router.post('/:type', async (req, res) => {
         console.log(req.session, 'REQ.SESSION IN POST ROUTE');
         const foundUser = await User.findById(req.session.userId);
         console.log('THIS IS FOUNDUSER: ', foundUser);
-        const createdFavorite = await foundUser.favorites[req.params.type].push(req.body);
+        const createdFavorite = foundUser.favorites[req.params.type].push(req.body);
         const savedFavorite = await createdFavorite.save();
         console.log("SAVED FAVORITE: ", savedFavorite);
         res.json({
