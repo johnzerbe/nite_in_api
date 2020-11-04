@@ -31,14 +31,14 @@ router.post('/:type', async (req, res) => {
         const foundUser = await User.findById(req.session.userId);
         console.log('THIS IS FOUNDUSER: ', foundUser);
         const createdFavorite = await foundUser.favorites[req.params.type].push(req.body);
-        const savedFavorite = await foundUser.save();
+        const savedFavorite = await createdFavorite.save();
         console.log("SAVED FAVORITE: ", savedFavorite);
         res.json({
             status: {
                 code: 201,
                 message: "Success"
             },
-            data: createdFavorite
+            data: savedFavorite
         })
     } catch(err) {
         console.log(err);
