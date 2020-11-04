@@ -7,7 +7,7 @@ const bcrypt = require("bcrypt");
 
 // LOGIN for registered users
 router.post("/", async (req,res) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://nitein3.herokuapp.com');
+  res.setHeader('Access-Control-Allow-Origin', 'https://nitein3.herokuapp.com');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
 	if(req.body.username == "" || req.body.password =="") {
         req.session.message = {};
