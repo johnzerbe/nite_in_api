@@ -33,20 +33,13 @@ router.post('/:type', async (req, res) => {
         const createdFavorite = await foundUser.favorites[req.params.type].push(req.body);
         const savedFavorite = await foundUser.save();
         console.log("SAVED FAVORITE: ", savedFavorite);
-        savedFavorite.then(response => res.json({
+        res.json({
             status: {
                 code: 201,
                 message: "Success"
             },
-            data: response
-        }))
-        // res.json({
-        //     status: {
-        //         code: 201,
-        //         message: "Success"
-        //     },
-        //     data: savedFavorite
-        // })
+            data: savedFavorite
+        })
     } catch(err) {
         console.log(err);
         res.send(err);
