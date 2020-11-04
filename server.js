@@ -25,7 +25,7 @@ app.use(session({
 
 // Set up CORS as Middleware, so any client can make a request
 // to the server
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 const corsOptions = {
