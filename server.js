@@ -3,13 +3,13 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const session = require('express-session');
-const MongoDBStore = require('connect-mongodb-session')(session);
+const MongoStore = require('connect-mongo')(session);
 require('dotenv').config();
 
 
 const dbConnection = require('./db/db');
 
-const sessionStore = new MongoDBStore(
+const sessionStore = new MongoStore(
     {
         mongooseConnection: dbConnection,
         secret: process.env.STORE_SECRET
