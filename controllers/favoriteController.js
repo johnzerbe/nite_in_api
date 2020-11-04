@@ -38,7 +38,7 @@ router.post('/:type', async (req, res) => {
                 code: 201,
                 message: "Success"
             },
-            data: savedFavorite
+            data: JSON.stringify(savedFavorite)
         })
     } catch(err) {
         console.log(err);
